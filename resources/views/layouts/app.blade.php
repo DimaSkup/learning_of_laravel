@@ -10,13 +10,5 @@
     @yield('content')
 </div>
 
-<div>
-    @section('advertisement')
-        <p>
-            Score some HackerPair swag in our store!
-        </p>
-    @show
-</div>
-
 </body>
 </html>

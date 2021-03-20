@@ -10,4 +10,13 @@ class EventsController extends Controller
     {
         return view('events.index');
     }
+
+    public function show($id)
+    {
+        $data = [
+            'id' => $id,
+        ];
+
+        return view('events.show')->with($data);
+    }
 }

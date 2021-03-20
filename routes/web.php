@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 //-------------------------------------
@@ -7,6 +8,9 @@ use Illuminate\Support\Facades\Route;
 //-------------------------------------
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\EventsController;
+use App\Http\Controllers\LanguagesController;
+use App\Http\Controllers\LocationsController;
+use App\Htpp\Controllers\MapsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,5 +23,24 @@ use App\Http\Controllers\EventsController;
 |
 */
 
-Route::get('/', [WelcomeController::class, 'index'])->name('homepage');
+Route::get('/', [WelcomeController::class, 'index']);
+
+Route::view('about', 'about.index')->name('about.index');
+Route::view('about/book', 'about.book')->name('about.book');
+Route::view('about/faq', 'about.faq')->name('about.faq');
+Route::view('about/privacy', 'about.privacy')->name('about.privacy');
+Route::view('about/tos', 'about.tos')->name('about.tos');
+
+Route::view('contact', 'contact.index')->name('contact.index');
+
+Route::get('events', [EventsController::class, 'index'])->name('events.index');
+Route::get('events/{id}', [EventsController::class, 'show'])->name('events.show');
+
+Route::get('languages', [LanguagesController::class, 'index'])->name('languages.index');
+
+Route::get('locations', [LocationsController::class, 'index'])->name('locations.index');
+
+Route::get('map', 'MapsController@index')->name('maps.index');
+
+Auth::routes();
 
