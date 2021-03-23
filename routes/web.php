@@ -1,5 +1,6 @@
 <?php
 
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -10,7 +11,8 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\LanguagesController;
 use App\Http\Controllers\LocationsController;
-use App\Htpp\Controllers\MapsController;
+use App\Http\Controllers\MapsController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -33,14 +35,15 @@ Route::view('about/tos', 'about.tos')->name('about.tos');
 
 Route::view('contact', 'contact.index')->name('contact.index');
 
-Route::get('events', [EventsController::class, 'index'])->name('events.index');
-Route::get('events/{id}', [EventsController::class, 'show'])->name('events.show');
+//Route::get('events', [EventsController::class, 'index'])->name('events.index');
+//Route::get('events/{id}', [EventsController::class, 'show'])->name('events.show');
+Route::resource('events', 'EventsController');
 
 Route::get('languages', [LanguagesController::class, 'index'])->name('languages.index');
 
 Route::get('locations', [LocationsController::class, 'index'])->name('locations.index');
 
-Route::get('map', 'MapsController@index')->name('maps.index');
+Route::get('map', [MapsController::class, 'index'])->name('maps.index');
 
 Auth::routes();
 

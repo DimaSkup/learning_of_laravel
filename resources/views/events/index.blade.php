@@ -9,6 +9,7 @@
         @empty
             <li>No events found!</li>
         @endforelse
+        {!! $events->links() !!}
     </ul>
 
 @endsection
