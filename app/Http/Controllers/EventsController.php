@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Event;
+
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class EventsController extends Controller
 {
@@ -14,7 +16,23 @@ class EventsController extends Controller
      */
     public function index()
     {
-        //
+        //$events = Event::all();
+
+        $events = Event::simplePaginate(10);
+
+        return view('events.index')->with('events', $events);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Event  $event
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $event = Event::findOrFail($id);
+        return view('events.show')->with('event', $event);
     }
 
     /**
@@ -36,17 +54,6 @@ class EventsController extends Controller
     public function store(Request $request)
     {
         //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Event  $event
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Event $event)
-    {
-        return view('events.show')->with('event', $event);
     }
 
     /**

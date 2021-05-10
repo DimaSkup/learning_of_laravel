@@ -14,7 +14,7 @@ class AddEnabledToEventsTable extends Migration
     public function up()
     {
         Schema::table('events', function (Blueprint $table) {
-            $table->boolean('enabled')->after('name');
+            $table->boolean('enabled')->after('description');
         });
     }
 

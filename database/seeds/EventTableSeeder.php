@@ -20,14 +20,11 @@ class EventTableSeeder extends Seeder
         foreach(range(1, 50) as $index)
         {
             Event::create([
-                'name' => $faker->sentence(2),
-                'enabled' => ($index % 2 == 0) ? true : false,
-                'city' => $faker->city,
-                'venue' => $faker->company,
-                'description' => $faker->paragraphs(1, true),
+                'name'          => $faker->sentence(2),
+                'city'          => $faker->city,
+                'street'        => $faker->company,
+                'description'   => $faker->paragraphs(1, true),
             ]);
         }
-
-
     }
 }

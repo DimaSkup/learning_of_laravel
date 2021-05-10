@@ -5,7 +5,7 @@
 
     <p>
         City: {{ $event->city }}<br/>
-        Venue: {{ $event->venue }}
+        Street: {{ $event->street }}
     </p>
 
     <h2>Description</h2>

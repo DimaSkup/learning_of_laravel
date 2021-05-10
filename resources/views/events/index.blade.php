@@ -1,15 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Events</h1>
 
-    <ul>
-        @forelse ($events as $event)
+<h1>Events</h1>
+
+{!! $events->links() !!}
+
+<p>{{ $events->count() }} records selected</p>
+<ul>
+    @forelse ($events as $event)
+        <a href="{{ route('events.show', ['event' => $event->id]) }}">
             <li>{{ $event->name }}</li>
-        @empty
-            <li>No events found!</li>
-        @endforelse
-        {!! $events->links() !!}
-    </ul>
+        </a>
+    @empty
+        <li>No events found!</li>
+    @endforelse
+</ul>
 
 @endsection
