@@ -20,6 +20,7 @@ class CreateEventsTable extends Migration
             $table->string('city');
             $table->text('description')->nullable();
             $table->timestamps();
+            $table->timestamp('started_at')->nullable();
         });
     }
 

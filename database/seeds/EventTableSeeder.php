@@ -24,6 +24,8 @@ class EventTableSeeder extends Seeder
                 'city'          => $faker->city,
                 'street'        => $faker->company,
                 'description'   => $faker->paragraphs(1, true),
+                'enabled'       => $faker->boolean(),
+                'started_at'    => time(),
             ]);
         }
     }

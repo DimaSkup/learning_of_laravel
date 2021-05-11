@@ -10,6 +10,27 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    public function getFullnameAttribute()
+    {
+        $this->firstname = "KOKOS";
+        return $this->firstname . " " . $this->lastname;
+    }
+
+    public function getFirstnameAttribute()
+    {
+        return "kek_" . $this->firstname;
+    }
+
+    public function getLastnameAttribute()
+    {
+        return "kek_" . $this->lastname;
+    }
+
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = bcrypt($password);
+    }
+
     /**
      * The attributes that are mass assignable.
      *
@@ -36,4 +57,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    private $firstname;
+    private $lastname;
 }

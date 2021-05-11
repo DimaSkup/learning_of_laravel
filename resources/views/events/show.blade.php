@@ -12,4 +12,10 @@
     <p>
         {{ $event->description }}
     </p>
+
+    @if ($event->occuringToday())
+        <p>
+            <b style="color:red">This event is occuring today!</b>
+        </p>
+    @endif
 @endsection

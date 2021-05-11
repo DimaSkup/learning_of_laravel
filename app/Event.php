@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Event extends Model
 {
@@ -22,15 +23,30 @@ class Event extends Model
 
         foreach ($name as $word)
         {
-            if (!in_array(strtolower($word), $ignore))
+            if (!in_array($word, $ignore))
             {
                 $modifiedName[] = ucfirst($word);
             }
-            else {
+            else
+            {
                 $modifiedName[] = strtolower($word);
             }
         }
 
         return join(' ', $modifiedName);
+    }
+
+    public function occuringToday()
+    {
+        return $this->started_at->isToday();
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('enabled', function (Builder $builder) {
+            $builder->where('enabled', '=', 1);
+        });
     }
 }
