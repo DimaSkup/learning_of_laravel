@@ -18,9 +18,13 @@ class EventsController extends Controller
     {
         //$events = Event::all();
 
-        $events = Event::simplePaginate(10);
+        //$events = Event::simplePaginate(10);      // a pagination
+        //$events = Event::withoutGlobalScopes()->get();    // without a global scope
+        //$events = Event::enabled()->get();          // with a local scope
+        //$events = Event::idRange(25, 34)->enabled()->get();      // with a dynamic local scope
+        $events = Event::findBySlugOrFail('assumenda-tenetur');
 
-        return view('events.index')->with('events', $events);
+        return view('events.index')->with('events', [$events]);
     }
 
     /**
@@ -29,9 +33,11 @@ class EventsController extends Controller
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Event $event)
     {
-        $event = Event::findOrFail($id);
+
+
+        //$event = Event::findOrFail($id);
         return view('events.show')->with('event', $event);
     }
 

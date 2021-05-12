@@ -4,14 +4,28 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Cviebrock\EloquentSluggable\Sluggable;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 
 class Event extends Model
 {
+    use Sluggable;
+    use SluggableScopeHelpers;
+
     protected $dates = [
         'created_at',
         'updated_at',
         'started_at',
     ];
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 
     public function getNameAttribute($value)
     {
@@ -41,6 +55,22 @@ class Event extends Model
         return $this->started_at->isToday();
     }
 
+    public function scopeEnabled($query)
+    {
+        return $query->where('enabled', 1);
+    }
+
+    public function scopeIdRange($query, $idFrom, $idTo)
+    {
+        return $query->whereBetween('id', [$idFrom, $idTo]);
+    }
+
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+    /*
     protected static function boot()
     {
         parent::boot();
@@ -49,4 +79,5 @@ class Event extends Model
             $builder->where('enabled', '=', 1);
         });
     }
+    */
 }
