@@ -37,13 +37,15 @@ class Event extends Model
 
         foreach ($name as $word)
         {
+            $word = strtolower($word);
+
             if (!in_array($word, $ignore))
             {
                 $modifiedName[] = ucfirst($word);
             }
             else
             {
-                $modifiedName[] = strtolower($word);
+                $modifiedName[] = $word;
             }
         }
 
