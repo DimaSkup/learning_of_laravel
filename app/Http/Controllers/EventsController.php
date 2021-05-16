@@ -22,7 +22,10 @@ class EventsController extends Controller
         //$events = Event::withoutGlobalScopes()->get();    // without a global scope
         //$events = Event::enabled()->get();          // with a local scope
         //$events = Event::idRange(25, 34)->enabled()->get();      // with a dynamic local scope
-        $events = Event::findBySlugOrFail('assumenda-tenetur');
+        //$events = Event::findBySlugOrFail('assumenda-tenetur');
+        $events = Event::withTrashed()->enabled()->get();
+
+        dd($events);
 
         return view('events.index')->with('events', [$events]);
     }
@@ -48,7 +51,7 @@ class EventsController extends Controller
      */
     public function create()
     {
-        //
+        return view('events.create');
     }
 
     /**
@@ -59,7 +62,13 @@ class EventsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $event = Event::create([
+            $request->input()
+        ]);
+
+        flash('Event created!')->success();
+
+        return redirect()->route('events.show')->with('event', $event);
     }
 
     /**
