@@ -11,10 +11,45 @@
                     {!! Form::text('name', null,
                         [
                             'class'         => 'form-control input-lg',
-                            'placeholder'   => 'PHP Hacking and Pizza'
+                            'placeholder'   => 'PHP Hacking and Pizza',
                         ])
                     !!}
                 </div>
+
+                <!-- an input city field -->
+                <div class="form-group">
+                    {!! Form::label('city', 'City', ['class' => 'control-label']) !!}
+                    {!! Form::text('city', null,
+                        [
+                            'class'         => 'form-control input-lg',
+                            'placeholder'   =>  'Please, input your city name',
+                        ])
+                    !!}
+                </div>
+
+                <!-- an input street field -->
+                <div class="form-group">
+                    {!! Form::label('street', 'Street', ['class' => 'control-label']) !!}
+                    {!! Form::text('street', null,
+                        [
+                            'class'         => 'form-control input-lg',
+                            'placeholder'   => 'Please, input your street name',
+                        ])
+                    !!}
+                </div>
+
+                <!-- an enabled checkbox field -->
+                <div class="form-group">
+                    {!! Form::label('enabled', 'Is enabled?', ['class' => 'control-label']) !!}
+                    {!! Form::checkbox('enabled', true) !!}
+                </div>
+
+                <!-- an activated checkbox field -->
+                <div class="form-group">
+                    {!! Form::label('activated', 'Is activated?', ['class' => 'control-label']) !!}
+                    {!! Form::checkbox('activated', true) !!}
+                </div>
+
 
                 <!-- a select max attendees field -->
                 <div class="form-group">
@@ -37,7 +72,7 @@
                     {!! Form::textarea('description', null,
                         [
                             'class' => 'form-control input-lg',
-                            'placeholder' => 'Describe the event'
+                            'placeholder' => 'Describe the event',
                         ])
                     !!}
                 </div>

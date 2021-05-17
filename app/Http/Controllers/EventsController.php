@@ -23,11 +23,9 @@ class EventsController extends Controller
         //$events = Event::enabled()->get();          // with a local scope
         //$events = Event::idRange(25, 34)->enabled()->get();      // with a dynamic local scope
         //$events = Event::findBySlugOrFail('assumenda-tenetur');
-        $events = Event::withTrashed()->enabled()->get();
+        $events = Event::enabled()->get();
 
-        dd($events);
-
-        return view('events.index')->with('events', [$events]);
+        return view('events.index')->with('events', $events);
     }
 
     /**
@@ -38,7 +36,7 @@ class EventsController extends Controller
      */
     public function show(Event $event)
     {
-
+        dd($event);
 
         //$event = Event::findOrFail($id);
         return view('events.show')->with('event', $event);
@@ -62,13 +60,20 @@ class EventsController extends Controller
      */
     public function store(Request $request)
     {
-        $event = Event::create([
-            $request->input()
-        ]);
+        $event = new Event;
+        $event->name = $request->name;
+        $event->city = $request->city;
+        $event->street = $request->street;
+        $event->enabled = $request->enabled;
+        $event->activated = (bool)($request->activated);
+        $event->description = $request->description;
+        $event->max_attendees = $request->max_attendees;
+
+        $event->save();
 
         flash('Event created!')->success();
 
-        return redirect()->route('events.show')->with('event', $event);
+        return redirect()->route('events.show', ['event' => $event->slug]);
     }
 
     /**

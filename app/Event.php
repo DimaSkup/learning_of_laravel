@@ -28,6 +28,7 @@ class Event extends Model
         'street',
         'city',
         'enabled',
+        'activated',
         'max_attendees'
     ];
 

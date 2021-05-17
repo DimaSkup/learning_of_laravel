@@ -17,4 +17,10 @@
     @endforelse
 </ul>
 
+<p>
+    <a href="{{ action('EventsController@create') }}">
+        <button>Create a new event</button>
+    </a>
+</p>
+
 @endsection

@@ -19,12 +19,15 @@ class EventTableSeeder extends Seeder
 
         foreach(range(1, 50) as $index)
         {
+            $enabled = $faker->boolean();
+
             Event::create([
                 'name'          => $faker->sentence(2),
                 'city'          => $faker->city,
                 'street'        => $faker->company,
                 'description'   => $faker->paragraphs(1, true),
-                'enabled'       => $faker->boolean(),
+                'enabled'       => $enabled,
+                'activated'     => ($enabled) && $faker->boolean(),
                 'started_at'    => time(),
             ]);
         }
