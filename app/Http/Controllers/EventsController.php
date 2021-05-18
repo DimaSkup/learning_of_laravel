@@ -23,7 +23,7 @@ class EventsController extends Controller
         //$events = Event::enabled()->get();          // with a local scope
         //$events = Event::idRange(25, 34)->enabled()->get();      // with a dynamic local scope
         //$events = Event::findBySlugOrFail('assumenda-tenetur');
-        $events = Event::enabled()->get();
+        $events = Event::simplePaginate(10);
 
         return view('events.index')->with('events', $events);
     }
@@ -36,9 +36,6 @@ class EventsController extends Controller
      */
     public function show(Event $event)
     {
-        dd($event);
-
-        //$event = Event::findOrFail($id);
         return view('events.show')->with('event', $event);
     }
 
@@ -60,14 +57,18 @@ class EventsController extends Controller
      */
     public function store(Request $request)
     {
-        $event = new Event;
-        $event->name = $request->name;
-        $event->city = $request->city;
-        $event->street = $request->street;
-        $event->enabled = $request->enabled;
-        $event->activated = (bool)($request->activated);
-        $event->description = $request->description;
-        $event->max_attendees = $request->max_attendees;
+        //dd($request->input(), $request->description);
+        $event = Event::updateOrCreate(
+            ['name' => $request->name],
+            [
+                'city'          => $request->city,
+                'street'        => $request->street,
+                'enabled'       => (bool)$request->enabled,
+                'activated'     => (bool)($request->activated),
+                'description'   => $request->description,
+                'max_attendees' => $request->max_attendees,
+            ]
+        );
 
         $event->save();
 
@@ -84,7 +85,7 @@ class EventsController extends Controller
      */
     public function edit(Event $event)
     {
-        //
+        return view('events.edit')->with('event', $event);
     }
 
     /**
@@ -107,6 +108,6 @@ class EventsController extends Controller
      */
     public function destroy(Event $event)
     {
-        //
+        dd("destroy");
     }
 }

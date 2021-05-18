@@ -18,7 +18,7 @@
 </ul>
 
 <p>
-    <a href="{{ action('EventsController@create') }}">
+    <a href="{{ route('events.create') }}">
         <button>Create a new event</button>
     </a>
 </p>

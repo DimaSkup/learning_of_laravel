@@ -1,0 +1,22 @@
+body a.edit-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 0;
+    background-color: orange;
+    border: 1px solid darkorange;
+    width: 230px;
+    height: 50px;
+    border-radius: 5px;
+    color: black;
+    transition: background-color .2s ease, color .2s ease;
+    text-decoration: none;
+    font-family: Aria, sans-serif;
+    font-size: 18px;
+    font-weight: 700
+}
+
+a.edit-button-container:hover {
+    color: black;
+    background-color: orangered;
+}

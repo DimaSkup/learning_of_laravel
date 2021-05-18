@@ -27,6 +27,7 @@ class Event extends Model
         'name',
         'street',
         'city',
+        'description',
         'enabled',
         'activated',
         'max_attendees'
@@ -68,7 +69,7 @@ class Event extends Model
 
     public function occuringToday()
     {
-        return $this->started_at->isToday();
+        return ($this->started_at) && $this->started_at->isToday();
     }
 
     public function scopeEnabled($query)

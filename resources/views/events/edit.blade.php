@@ -3,16 +3,19 @@
 @section('content')
     <div class="row">
         <div class="col" style="width: 500px">
-            {!! Form::open(['route' => 'events.store'], ['class' => 'form']) !!}    <!-- a form opening tag -->
+            {!! Form::model($event,
+                [
+                    'method'    => 'put',
+                    'route'     => ['events.update', $event->slug],
+                    'class'     => 'form'
+                ]
+            ) !!}    <!-- a form opening tag -->
 
                 <!-- an input name field -->
                 <div class="form-group">
                     {!! Form::label('name', 'Event Name', ['class' => 'control-label']) !!}
                     {!! Form::text('name', null,
-                        [
-                            'class'         => 'form-control input-lg',
-                            'placeholder'   => 'PHP Hacking and Pizza',
-                        ])
+                        ['class' => 'form-control' ])
                     !!}
                 </div>
 
@@ -20,10 +23,7 @@
                 <div class="form-group">
                     {!! Form::label('city', 'City', ['class' => 'control-label']) !!}
                     {!! Form::text('city', null,
-                        [
-                            'class'         => 'form-control input-lg',
-                            'placeholder'   =>  'Please, input your city name',
-                        ])
+                        ['class' => 'form-control input-lg'])
                     !!}
                 </div>
 
@@ -31,10 +31,7 @@
                 <div class="form-group">
                     {!! Form::label('street', 'Street', ['class' => 'control-label']) !!}
                     {!! Form::text('street', null,
-                        [
-                            'class'         => 'form-control input-lg',
-                            'placeholder'   => 'Please, input your street name',
-                        ])
+                        ['class' => 'form-control input-lg'])
                     !!}
                 </div>
 
@@ -57,10 +54,7 @@
                         ['class' => 'control-label'])
                     !!}
                     {!! Form::select('max_attendees', [2 => '2', 3 => '3', 4 => '4', 5 => '5'], null,
-                        [
-                            'class' => 'form-control input-lg',
-                            'placeholder' => 'Maximum Number of Attendees',
-                        ])
+                        ['class' => 'form-control input-lg'])
                     !!}
                 </div>
 
@@ -70,18 +64,15 @@
                         ['class' => 'control-label'])
                     !!}
                     {!! Form::textarea('description', null,
-                        [
-                            'class' => 'form-control input-lg',
-                            'placeholder' => 'Describe the event',
-                        ])
+                        ['class' => 'form-control input-lg'])
                     !!}
                 </div>
 
                 <!-- a submit button -->
                 <div class="form-group">
-                    {!! Form::submit('Add Event',
+                    {!! Form::submit('Update Event',
                         [
-                            'class' => 'btn btn-info btn-lg',
+                            'class' => 'btn btn-primary',
                             'style' => 'width: 100%'
                         ])
                     !!}
