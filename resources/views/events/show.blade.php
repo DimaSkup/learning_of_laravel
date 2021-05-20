@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+
+<div class="event-show-content">
     <h1>{{ $event->name }}</h1>
 
     <p>
@@ -25,12 +27,22 @@
     @endif
 
 
-    {{ link_to_route('events.edit', 'Edit Event', ['event' => $event], [ 'class' => 'edit-button-container']) }}
 
-    <div class="delete-button-container">
-        <a href="{{ route('events.destroy', ['event' => $event->slug]) }}">
-            <button style="color: red;">Delete the event</button>
-        </a>
+    <div class="event-show-content-buttons">
+        <!-- This is a link to the event edit form -->
+        {{ link_to_route('events.edit', 'Edit Event', ['event' => $event], [ 'class' => 'edit-button-container']) }}
+
+
+        <!-- This is a link to the event delete  -->
+        {!! Form::open(
+                 [
+                     'route' => ['events.destroy', $event],
+                     'method' => 'delete'
+                 ]
+             ) !!}
+        {!! Form::submit('Delete Event', ['class' => 'btn btn-delete-event']) !!}
+        {!! Form::close() !!}
     </div>
+</div>
 
 @endsection

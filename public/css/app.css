@@ -1,10 +1,12 @@
-body a.edit-button-container {
+
+/* An edit event button */
+a.edit-button-container {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-right: 0;
     background-color: orange;
-    border: 1px solid darkorange;
+    border: 3px solid orange;
     width: 230px;
     height: 50px;
     border-radius: 5px;
@@ -16,7 +18,39 @@ body a.edit-button-container {
     font-weight: 700
 }
 
+/* An edit event hover button */
 a.edit-button-container:hover {
     color: black;
-    background-color: orangered;
+    background-color: white;
+}
+
+/* An event delete button */
+.btn-delete-event {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 0;
+    background-color: #D7263D;
+    border: 3px solid #D7263D;
+    width: 230px;
+    height: 50px;
+    border-radius: 5px;
+    color: black;
+    transition: background-color .2s ease, color .2s ease;
+    text-decoration: none;
+    font-family: Aria, sans-serif;
+    font-size: 18px;
+    font-weight: 700
+}
+
+.btn-delete-event:hover {
+    color: black;
+    background-color: white;
+}
+
+div.event-show-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
