@@ -6,15 +6,16 @@ use App\Event;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Validator;
 
 class EventsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
         //$events = Event::all();
 
@@ -25,7 +26,13 @@ class EventsController extends Controller
         //$events = Event::findBySlugOrFail('assumenda-tenetur');
         $events = Event::simplePaginate(10);
 
-        return view('events.index')->with('events', $events);
+        // A flash-message
+        $messageAboutSuccessfulDeleting = $request->session()->get('messageEventWasDeleted');
+        ($messageAboutSuccessfulDeleting) ? flash($messageAboutSuccessfulDeleting)->success() : null;
+
+        return view('events.index')
+                ->with('events', $events)
+                ->with('messageAboutSuccessfulDeleting');
     }
 
     /**
@@ -57,7 +64,26 @@ class EventsController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->input(), $request->description);
+        $rules = [
+            'name'          => 'required|string|min:10|max:50',
+            'city'          => 'required|string|min:3|max:50',
+            'street'        => 'required|string|min:3|max:50',
+            'max_attendees' => 'required|integer|digits_between:2,5',
+            'description'   => 'required|string',
+        ];
+
+        $messages = [
+            'required'      => 'Please provide an event :attribute',
+            'max_attendees.required'    => 'What is the maximum number of
+                attendees allowed to attend your event?',
+            'name.min'      => 'Event names must consist of at least 10 characters',
+            'name.max'      => 'Event names cannot be longer that 50 characters',
+            'max_attendees.digits_between'  => 'We try to keep event cozy,
+                consisting of between 2 and 5 attendees, including you.'
+        ];
+
+        Validator::make($request->input(), $rules, $messages)->validate();
+
         $event = Event::updateOrCreate(
             ['name' => $request->name],
             [
@@ -86,8 +112,8 @@ class EventsController extends Controller
      */
     public function edit(Event $event, Request $request)
     {
-        $messageAboutSuccessfulEditing = $request->session()->get('message');
-        ($messageAboutSuccessfulEditing) ? flash($messageAboutSuccessfulEditing)->success() : "";
+        $messageAboutSuccessfulEditing = $request->session()->get('messageEventWasEdited');
+        ($messageAboutSuccessfulEditing) ? flash($messageAboutSuccessfulEditing)->success() : null;
 
         return view('events.edit')
              ->with('event', $event)
@@ -109,17 +135,21 @@ class EventsController extends Controller
 
         return redirect()
                 ->route('events.edit', $event)
-                ->with('message', 'The event was successfully edited!');
+                ->with('messageEventWasEdited', 'The event was successfully edited!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Event  $event
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Event $event)
     {
+        $event->delete();
 
+        return redirect()
+                ->route('events.index')
+                ->with('messageEventWasDeleted', 'The events has been deleted!');
     }
 }

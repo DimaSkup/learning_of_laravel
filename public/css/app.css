@@ -54,3 +54,17 @@ div.event-show-content {
     flex-direction: column;
     align-items: center;
 }
+
+
+
+/* An submit error messages block */
+.alert-danger {
+    width: 100%;
+    background-color: darksalmon;
+}
+
+.alert-danger > ul > li {
+    color: black;
+}
+
+
