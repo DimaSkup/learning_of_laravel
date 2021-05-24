@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Event;
 
+use App\Http\Requests\EventStoreRequest;
+
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Validator;
+
 
 class EventsController extends Controller
 {
@@ -59,11 +62,12 @@ class EventsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  EventStoreRequest  $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(EventStoreRequest $request)
     {
+        /*
         $rules = [
             'name'          => 'required|string|min:10|max:50',
             'city'          => 'required|string|min:3|max:50',
@@ -82,7 +86,11 @@ class EventsController extends Controller
                 consisting of between 2 and 5 attendees, including you.'
         ];
 
+
         Validator::make($request->input(), $rules, $messages)->validate();
+        */
+
+
 
         $event = Event::updateOrCreate(
             ['name' => $request->name],
