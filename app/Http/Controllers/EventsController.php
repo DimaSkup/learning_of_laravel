@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Event;
+use App\User;
 
 use App\Http\Requests\EventStoreRequest;
 
@@ -20,6 +21,10 @@ class EventsController extends Controller
      */
     public function index(Request $request)
     {
+
+        $user = User::firstWhere('id', 2);
+        $user->profile()->delete();
+
         //$events = Event::all();
 
         //$events = Event::simplePaginate(10);      // a pagination
