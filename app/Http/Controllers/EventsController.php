@@ -70,32 +70,10 @@ class EventsController extends Controller
      * @param  EventStoreRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(EventStoreRequest $request)
+    //public function store(EventStoreRequest $request)
+    public function store(Request $request)
     {
-        /*
-        $rules = [
-            'name'          => 'required|string|min:10|max:50',
-            'city'          => 'required|string|min:3|max:50',
-            'street'        => 'required|string|min:3|max:50',
-            'max_attendees' => 'required|integer|digits_between:2,5',
-            'description'   => 'required|string',
-        ];
-
-        $messages = [
-            'required'      => 'Please provide an event :attribute',
-            'max_attendees.required'    => 'What is the maximum number of
-                attendees allowed to attend your event?',
-            'name.min'      => 'Event names must consist of at least 10 characters',
-            'name.max'      => 'Event names cannot be longer that 50 characters',
-            'max_attendees.digits_between'  => 'We try to keep event cozy,
-                consisting of between 2 and 5 attendees, including you.'
-        ];
-
-
-        Validator::make($request->input(), $rules, $messages)->validate();
-        */
-
-
+        $this->storeEventValidator($request);
 
         $event = Event::updateOrCreate(
             ['name' => $request->name],
@@ -164,5 +142,35 @@ class EventsController extends Controller
         return redirect()
                 ->route('events.index')
                 ->with('messageEventWasDeleted', 'The events has been deleted!');
+    }
+
+
+
+
+    private function storeEventValidator(Request $request)
+    {
+        $rules = [
+            'name'          => 'required|string|min:10|max:50',
+            'city'          => 'required|string|min:3|max:50',
+            'street'        => 'required|string|min:3|max:50',
+            'max_attendees' => 'required|numeric|min:2|max:5',
+            'description'   => 'required|string',
+        ];
+
+        $messages = [
+            'required'      => 'Please provide an event :attribute',
+            'max_attendees.required'    => 'What is the maximum number of
+                attendees allowed to attend your event?',
+            'name.min'      => 'Event names must consist of at least 10 characters',
+            'name.max'      => 'Event names cannot be longer that 50 characters',
+            'max_attendees.digits_between'  => 'We try to keep event cozy,
+                consisting of between 2 and 5 attendees, including you.'
+        ];
+
+        $inputFormData = $request->input();
+        $inputFormData['max_attendees'] = (int)$inputFormData['max_attendees'];
+        $inputFormData['state_id'] = (int)$inputFormData['state_id'];
+
+        Validator::make($inputFormData, $rules, $messages)->validate();
     }
 }

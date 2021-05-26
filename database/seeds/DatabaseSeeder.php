@@ -14,5 +14,6 @@ class DatabaseSeeder extends Seeder
         $this->call('EventTableSeeder');
         $this->call('UserTableSeeder');
         $this->call('ProfileTableSeeder');
+        $this->call('StateTableSeeder');
     }
 }

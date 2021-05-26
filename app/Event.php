@@ -30,7 +30,8 @@ class Event extends Model
         'description',
         'enabled',
         'activated',
-        'max_attendees'
+        'max_attendees',
+        'state_id',
     ];
 
     public function sluggable()
@@ -87,6 +88,14 @@ class Event extends Model
     {
         return 'slug';
     }
+
+    public function state()
+    {
+        return $this->belongsTo('App\State');
+    }
+
+
+
     /*
     protected static function boot()
     {
