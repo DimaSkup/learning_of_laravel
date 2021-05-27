@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Event;
 use App\User;
+use App\State;
 
 use App\Http\Requests\EventStoreRequest;
 
@@ -71,9 +72,15 @@ class EventsController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     //public function store(EventStoreRequest $request)
-    public function store(Request $request)
+    public function store(EventStoreRequest $request)
     {
-        $this->storeEventValidator($request);
+        //$this->storeEventValidator($request);
+
+        $state = State::where('id', $request->state_id)->first();      // here we confirm the ID does in fact belong to a record in the states table
+        if ($state == null) {                           // if there is no such a state with this id
+            flash("You cannot create an event with such a state!")->error();
+            return redirect()->route('events.create');
+        }
 
         $event = Event::updateOrCreate(
             ['name' => $request->name],
@@ -84,13 +91,13 @@ class EventsController extends Controller
                 'activated'     => (bool)($request->activated),
                 'description'   => $request->description,
                 'max_attendees' => $request->max_attendees,
+                'state_id'      => $state->id,
             ]
         );
 
-        $event->save();
+        //$event->save();
 
         flash('Event created!')->success();
-
         return redirect()->route('events.show', ['event' => $event->slug]);
     }
 
@@ -168,8 +175,8 @@ class EventsController extends Controller
         ];
 
         $inputFormData = $request->input();
-        $inputFormData['max_attendees'] = (int)$inputFormData['max_attendees'];
-        $inputFormData['state_id'] = (int)$inputFormData['state_id'];
+        //$inputFormData['max_attendees'] = (int)$inputFormData['max_attendees'];
+        //$inputFormData['state_id'] = (int)$inputFormData['state_id'];
 
         Validator::make($inputFormData, $rules, $messages)->validate();
     }

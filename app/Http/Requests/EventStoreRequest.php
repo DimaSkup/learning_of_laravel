@@ -27,8 +27,9 @@ class EventStoreRequest extends FormRequest
             'name'          => 'required|string|min:10|max:50',
             'city'          => 'required|string|min:3|max:50',
             'street'        => 'required|string|min:3|max:50',
-            'max_attendees' => 'required|integer|digits_between:2,5',
+            'max_attendees' => 'required|integer|min:2|max:5',
             'description'   => 'required|string',
+            'state_id'      => 'required|integer',
         ];
     }
 

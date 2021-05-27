@@ -2,6 +2,8 @@
 
 @section('content')
 
+<a href="{{ route('events.index') }}">Back to all events</a>
+
 <div class="event-show-content">
     <h1>{{ $event->name }}</h1>
 
