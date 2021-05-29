@@ -39,6 +39,7 @@ Route::view('contact', 'contact.index')->name('contact.index');
 //Route::get('events/{id}', [EventsController::class, 'show'])->name('events.show');
 Route::resource('events', 'EventsController');
 Route::resource('states', 'StatesController');
+Route::resource('event_user', 'EventUserController');
 
 Route::get('languages', [LanguagesController::class, 'index'])->name('languages.index');
 

@@ -36,6 +36,12 @@ class User extends Authenticatable
         return $this->hasOne('App\Profile');
     }
 
+    public function events()
+    {
+        return $this->belongsToMany('App\Event')
+                ->withTimestamps();
+    }
+
     /**
      * The attributes that are mass assignable.
      *

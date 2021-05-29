@@ -22,10 +22,6 @@ class EventsController extends Controller
      */
     public function index(Request $request)
     {
-
-        $user = User::firstWhere('id', 2);
-        $user->profile()->delete();
-
         //$events = Event::all();
 
         //$events = Event::simplePaginate(10);      // a pagination
@@ -40,19 +36,35 @@ class EventsController extends Controller
         ($messageAboutSuccessfulDeleting) ? flash($messageAboutSuccessfulDeleting)->success() : null;
 
         return view('events.index')
-                ->with('events', $events)
-                ->with('messageAboutSuccessfulDeleting');
+                ->with('events', $events);
     }
 
     /**
      * Display the specified resource.
      *
      * @param  \App\Event  $event
+     * @param  Request $request
      * @return \Illuminate\Http\Response
      */
-    public function show(Event $event)
+    public function show(Event $event, Request $request)
     {
-        return view('events.show')->with('event', $event);
+        $session = $request->getSession();
+        $relatedToEventUsers = $event->users()->get();
+
+        $messageSuccessCreateRelation = $session->get('messageSuccessCreateRelation');
+        if ($messageSuccessCreateRelation)
+        {
+            flash($messageSuccessCreateRelation)->success();
+        }
+        else
+        {
+            $messageErrorCreateRelation = $session->get('messageErrorCreateRelation');
+            flash($messageErrorCreateRelation)->error();
+        }
+
+        return view('events.show')
+                ->with('event', $event)
+                ->with('relatedUsers', $relatedToEventUsers);
     }
 
     /**

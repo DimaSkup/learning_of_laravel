@@ -94,16 +94,22 @@ class Event extends Model
         return $this->belongsTo('App\State');
     }
 
+    public function users()
+    {
+        return $this->belongsToMany('App\User')
+                ->withTimestamps();
+    }
 
 
-    /*
+
     protected static function boot()
     {
         parent::boot();
 
         static::addGlobalScope('enabled', function (Builder $builder) {
             $builder->where('enabled', '=', 1);
+            $builder->orderBy('created_at', "DESC");
         });
     }
-    */
+
 }

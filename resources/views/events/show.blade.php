@@ -28,6 +28,20 @@
         </p>
     @endif
 
+    <h3>Related users:</h3>
+    <ul>
+        @forelse ($relatedUsers as $relatedUser)
+            <li>{{ $relatedUser->name }}</li>
+        @empty
+            There in no related user
+        @endforelse
+    </ul>
+
+
+    <div>
+        IS event ENABLED?
+        {{ $event->enabled }}
+    </div>
 
 
     <div class="event-show-content-buttons">
