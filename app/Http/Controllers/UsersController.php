@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use App\Event;
 
 use Illuminate\Http\Request;
 
-class EventUserController extends Controller
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +15,9 @@ class EventUserController extends Controller
      */
     public function index()
     {
-        return view('event_user.index');
+        $allUsers = User::all()->sortBy('name');
+
+        return view('users.index')->with('users', $allUsers);
     }
 
     /**
@@ -33,33 +34,11 @@ class EventUserController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //dd($request->event_id);
-
-        $event = Event::find($request->event_id);
-        $user = User::find($request->user_id);
-
-
-        if ($event->users->contains($user))
-        {
-            return redirect()->route('events.show', [$event->slug])
-                    ->with('message', 'Duplicate entry!')
-                    ->with('success', false);
-        }
-        else
-        {
-            $event->users()->save($user);
-            $user->events()->attach(
-                [$event->id => ['comment' => 'I am excited to attend this event!']]
-            );
-
-            return redirect()->route('events.show', [$event->slug])
-                    ->with('message', 'The user has joined the event!')
-                    ->with('success', true);
-        }
+        //
     }
 
     /**
@@ -68,9 +47,11 @@ class EventUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        //$user = User::find($id)->first();
+
+        return view('users.show')->with('user', $user);
     }
 
     /**

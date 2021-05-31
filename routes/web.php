@@ -40,6 +40,7 @@ Route::view('contact', 'contact.index')->name('contact.index');
 Route::resource('events', 'EventsController');
 Route::resource('states', 'StatesController');
 Route::resource('event_user', 'EventUserController');
+Route::resource('users', 'UsersController');
 
 Route::get('languages', [LanguagesController::class, 'index'])->name('languages.index');
 

@@ -50,16 +50,12 @@ class EventsController extends Controller
     {
         $session = $request->getSession();
         $relatedToEventUsers = $event->users()->get();
-
-        $messageSuccessCreateRelation = $session->get('messageSuccessCreateRelation');
-        if ($messageSuccessCreateRelation)
+        
+        $message = $session->get('message');
+        if ($message)
         {
-            flash($messageSuccessCreateRelation)->success();
-        }
-        else
-        {
-            $messageErrorCreateRelation = $session->get('messageErrorCreateRelation');
-            flash($messageErrorCreateRelation)->error();
+            $isSuccessfulCreationOfRelation = $session->get('success');
+            ($isSuccessfulCreationOfRelation) ? flash($message)->success() : flash($message)->error();
         }
 
         return view('events.show')

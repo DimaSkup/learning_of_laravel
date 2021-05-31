@@ -8,10 +8,7 @@
 <body>
 
 <div class="container">
-    <div class="flash-message" style="color:green;">
-        @include('flash::message')
-    </div>
-
+    @include('flash::message')
 
     @if ($errors->any())
         <div class="alert alert-danger">

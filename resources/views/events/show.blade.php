@@ -5,7 +5,7 @@
 <a href="{{ route('events.index') }}">Back to all events</a>
 
 <div class="event-show-content">
-    <h1>{{ $event->name }}</h1>
+    <h1>{{ $event->name }} with id:{{ $event->id }}</h1>
 
     <p>
         City: {{ $event->city }}<br/>
@@ -31,7 +31,9 @@
     <h3>Related users:</h3>
     <ul>
         @forelse ($relatedUsers as $relatedUser)
-            <li>{{ $relatedUser->name }}</li>
+            <li>
+                {{ $relatedUser->name }} left a comment:
+            </li>
         @empty
             There in no related user
         @endforelse
