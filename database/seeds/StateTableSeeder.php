@@ -1,6 +1,7 @@
 <?php
 
 use App\State;
+use App\User;
 
 use Illuminate\Database\Seeder;
 
@@ -23,22 +24,34 @@ class StateTableSeeder extends Seeder
 
         foreach(range(1, 50) as $index)
         {
-            $state = $faker->state;
+            $stateName = $faker->state;
 
-            $statesWords = explode(" ", $state);
+            $statesWords = explode(" ", $stateName);
             if (count($statesWords) != 1)
             {
                 $abbreviation = strtoupper($statesWords[0][0].$statesWords[1][0]);
             }
             else
             {
-                $abbreviation = strtoupper($state[0].$state[1]);
+                $abbreviation = strtoupper($stateName[0].$stateName[1]);
             }
 
-            State::create([
+            $state = new State;
+
+            $state->name = $stateName;
+            $state->abbreviation = $abbreviation;
+            $state->save();
+
+            $user = User::find($index);
+            $user->state_id = $state->id;
+            $user->save();
+
+            /*
+             State::create([
                 'name'              => $state,
                 'abbreviation'      => $abbreviation,
             ]);
+             */
         }
     }
 }

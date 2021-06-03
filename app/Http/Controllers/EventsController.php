@@ -50,7 +50,7 @@ class EventsController extends Controller
     {
         $session = $request->getSession();
         $relatedToEventUsers = $event->users()->get();
-        
+
         $message = $session->get('message');
         if ($message)
         {

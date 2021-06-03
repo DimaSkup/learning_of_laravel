@@ -13,8 +13,19 @@ class State extends Model
                     ->where('activated', true);
     }
 
+    public function users()
+    {
+        return $this->hasMany('App\User');
+    }
+
+    public function favorites()
+    {
+        return $this->hasManyThrough('App\Event', 'App\User');
+    }
+
     protected $fillable = [
         'name',
         'abbreviation',
+        'user_id'
     ];
 }

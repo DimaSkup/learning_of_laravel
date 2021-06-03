@@ -13,7 +13,9 @@ class EventTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('events')->truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         $faker = \Faker\Factory::create();
 

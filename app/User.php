@@ -43,6 +43,11 @@ class User extends Authenticatable
                 ->withTimestamps();
     }
 
+    public function state()
+    {
+        return $this->belongsTo('App\State');
+    }
+
     /**
      * The attributes that are mass assignable.
      *
@@ -52,6 +57,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'state_id',
     ];
 
     /**
