@@ -4,7 +4,7 @@
 
 <h1>Events</h1>
 
-{{-- {!! $events->links() !!} --}}
+{!! $events->links() !!}
 
 {{-- <p>{{ $events->count() }} records selected</p> --}}
 <ul>

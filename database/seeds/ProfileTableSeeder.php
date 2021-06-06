@@ -18,7 +18,7 @@ class ProfileTableSeeder extends Seeder
 
         $faker = \Faker\Factory::create();
 
-        foreach(range(1, 20) as $index)
+        foreach(range(1, 50) as $index)
         {
             $profile = new Profile;
 
@@ -26,7 +26,7 @@ class ProfileTableSeeder extends Seeder
             $profile->url = $faker->url;
 
 
-            $user = User::firstWhere('id', $index);
+            $user = User::find($index);
             $user->profile()->save($profile);
         }
     }

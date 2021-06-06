@@ -13,9 +13,10 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $allUsers = User::all()->sortBy('name');
+        $sortOrder = $request->get('sort_by');          // we'll sort list of users by this value
+        $allUsers = User::all()->sortBy($sortOrder);
 
         return view('users.index')->with('users', $allUsers);
     }
