@@ -17,6 +17,7 @@ class UserTableSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('profiles')->truncate();
         DB::table('users')->truncate();
+        DB::table('event_user')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         $faker = \Faker\Factory::create();
@@ -30,24 +31,20 @@ class UserTableSeeder extends Seeder
             $user->email = $faker->name(null) . "@gmail.com";
             $user->password = $faker->password();
 
-            // relations with a user
-            $eventsIds = [];
-            $eventsCount = 0;
-            while ($eventsCount < random_int(0, 3))
-            {
-                // events ids
-                $eventsIds[] = random_int(1, 50);
-                // знайти events по events ids and enabled == true
-                _HERE_
-                $eventsCount++;
-            };
+            $user->save();
 
-            if ($eventsIds != [] && $user->id)
+            // creation of relations between a user and random events
+            // here we'll find an events by random id and enabled == true
+            $events = Event::where('enabled', true)
+                            ->inRandomOrder()
+                            ->limit(random_int(0, 5))
+                            ->get();
+            if ($events)
             {
-                $user->events()->sync($eventsIds);
+                $user->events()->attach($events);
             }
 
-            $user->save();
+
 
 
             /*

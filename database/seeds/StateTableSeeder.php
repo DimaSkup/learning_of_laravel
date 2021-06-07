@@ -42,6 +42,7 @@ class StateTableSeeder extends Seeder
             $state->abbreviation = $abbreviation;
             $state->save();
 
+            // set a user as an attendee to this state
             $user = User::find($index);
             $user->state_id = $state->id;
             $user->save();

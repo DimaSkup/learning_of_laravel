@@ -21,5 +21,20 @@
             @endforelse
         </ul>
     </div>
+
+    <!-- favourited events created by users residing in this state -->
+    <div>
+        Favorited events created by users which are residing in this state:
+        {{ dump($state->favorites) }}
+        <ul>
+           {{--
+           @foreach($state->favorites as $favorite)
+                <li>
+                    {{ $favorite->name }}
+                </li>
+            @endforeach
+            --}}
+        </ul>
+    </div>
 </div>
 @endsection
