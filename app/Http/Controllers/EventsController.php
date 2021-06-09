@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Event;
 use App\User;
 use App\State;
+use App\Comment;
 
 use App\Http\Requests\EventStoreRequest;
 
@@ -22,6 +23,11 @@ class EventsController extends Controller
      */
     public function index(Request $request)
     {
+        $event = Event::find(1);
+        $c = new Comment();
+        $c->body = "Great event! KEK";
+        $event->comments()->save($c);
+
         //$events = Event::all();
 
         //$events = Event::simplePaginate(10);      // a pagination
@@ -29,7 +35,9 @@ class EventsController extends Controller
         //$events = Event::enabled()->get();          // with a local scope
         //$events = Event::idRange(25, 34)->enabled()->get();      // with a dynamic local scope
         //$events = Event::findBySlugOrFail('assumenda-tenetur');
-        $events = Event::simplePaginate(10);
+        $events = Event::with(['state'])
+                        ->orderBy('started_at', 'desc')
+                        ->paginate();
 
         // A flash-message
         $messageAboutSuccessfulDeleting = $request->session()->get('messageEventWasDeleted');

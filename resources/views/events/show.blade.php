@@ -45,6 +45,15 @@
         {{ $event->enabled }}
     </div>
 
+    <div>
+        <h3>Comments</h3>
+            @foreach ($event->comments as $comment)
+                <p>
+                    {{ $comment->body }}
+                </p>
+            @endforeach
+    </div>
+
 
     <div class="event-show-content-buttons">
         <!-- This is a link to the event edit form -->
