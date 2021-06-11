@@ -13,6 +13,8 @@ use App\Http\Controllers\LanguagesController;
 use App\Http\Controllers\LocationsController;
 use App\Http\Controllers\MapsController;
 
+use App\Http\Controllers\ContactController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +43,12 @@ Route::resource('events', 'EventsController');
 Route::resource('states', 'StatesController');
 Route::resource('event_user', 'EventUserController');
 Route::resource('users', 'UsersController');
+
+// emails sending controllers
+Route::get('contact', [ContactController::class, 'create'])->name('contact.create');
+Route::post('contact', [ContactController::class, 'store'])->name('contact.store');
+
+
 
 Route::get('languages', [LanguagesController::class, 'index'])->name('languages.index');
 
