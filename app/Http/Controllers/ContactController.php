@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactEmail;
+
 use App\Http\Requests;
 
 use App\Http\Requests\ContactFormRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
@@ -24,6 +27,8 @@ class ContactController extends Controller
 
 
         // Mail delivery logic goes here
+        Mail::to(config('mail.support.address'))->send(new ContactEmail($contact));
+
         flash('Your message has been sent!')->success();
 
         return redirect()->route('contact.create');
