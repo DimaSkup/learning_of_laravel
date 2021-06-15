@@ -31,8 +31,12 @@ class ContactEmail extends Mailable
     public function build()
     {
         return $this
-                ->to(config('mail.from.address'))
-                ->subject('HackerPair Inquiry')
-                ->view('emails.contact');
+                ->from('example@example.com')
+                //->to(config('mail.from.address'))
+               // ->subject('HackerPair Inquiry')
+                ->view('emails.contact')
+                ->attachData("asdfasdfsdaf", 'name.pdf', [
+                    'mime'  => 'application/pdf',
+                ]);
     }
 }

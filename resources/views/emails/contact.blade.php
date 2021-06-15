@@ -1,9 +1,3 @@
 Hi,
+{{ $message->embed('/home/dimapc/Downloads/af081dc0f1907af272589ee04222572d.jpg') }}
 
-A KEK user has sent you a message.
-
-Name: {{ $contact['name'] }}
-
-E-mail: {{ $contact['email'] }}
-
-Message: {{ $contact['msg'] }}

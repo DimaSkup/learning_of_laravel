@@ -7,11 +7,21 @@ use App\Mail\ContactEmail;
 use App\Http\Requests;
 
 use App\Http\Requests\ContactFormRequest;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
+    public function sendemail()
+    {
+        $data = ['name' => "DimaSkup", 'email' => "DimaSkupejko@gmail.com"];
+        Mail::send('emails.contact', $data, function ($message) use ($data) {
+            $message->to($data['email'], $data['name'])->subject('Test Subject');
+        });
+        flash('Email was sent!');
+    }
+
     public function create()
     {
         return view('contact.create');
@@ -27,7 +37,8 @@ class ContactController extends Controller
 
 
         // Mail delivery logic goes here
-        Mail::to(config('mail.support.address'))->send(new ContactEmail($contact));
+        //Mail::to(config('mail.support.address'))->send(new ContactEmail($contact));
+        Mail::to("DimaSkupejko@gmail.com")->send(new ContactEmail($contact));
 
         flash('Your message has been sent!')->success();
 

@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('MAIL_MAILER', 'smtp'),
+    'default' => env('MAIL_MAILER', 'mailgun'),
 
     /*
     |--------------------------------------------------------------------------
@@ -51,6 +51,9 @@ return [
 
         'mailgun' => [
             'transport' => 'mailgun',
+            'host'      => env('MAIL_HOST'),
+            'port' => env('MAIL_PORT', 587),
+            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
         ],
 
         'postmark' => [

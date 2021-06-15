@@ -49,14 +49,7 @@ Route::resource('users', 'UsersController');
 Route::get('contact', [ContactController::class, 'create'])->name('contact.create');
 Route::post('contact', [ContactController::class, 'store'])->name('contact.store');
 
-Route::get('send_test_email', function() {
-    Mail::raw('Sending emails with Mailgun and Laravel', function($message)
-    {
-        $message->subject('HELLO!');
-        $message->from('your-comrade@website_name.com', 'KOKOS');
-        $message->to('DimaSkupejko@gmail.com');
-    });
-});
+Route::get('send_test_email', [ContactController::class, 'sendemail']);
 
 Route::get('languages', [LanguagesController::class, 'index'])->name('languages.index');
 
