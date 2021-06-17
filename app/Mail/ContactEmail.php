@@ -35,8 +35,8 @@ class ContactEmail extends Mailable
                 //->to(config('mail.from.address'))
                // ->subject('HackerPair Inquiry')
                 ->view('emails.contact')
-                ->attachData("asdfasdfsdaf", 'name.pdf', [
-                    'mime'  => 'application/pdf',
+                ->attachData($this->pdf, 'name.pdf', [
+                    'mime' => 'application/pdf',
                 ]);
     }
 }
