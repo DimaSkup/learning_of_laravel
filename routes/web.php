@@ -48,6 +48,7 @@ Route::resource('users', 'UsersController');
 // emails sending controllers
 Route::get('contact', [ContactController::class, 'create'])->name('contact.create');
 Route::post('contact', [ContactController::class, 'store'])->name('contact.store');
+Route::get('ship', [ContactController::class, 'ship'])->name('contact.ship');
 
 Route::get('send_test_email', [ContactController::class, 'sendemail']);
 

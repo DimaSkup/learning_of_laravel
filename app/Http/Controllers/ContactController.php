@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ContactEmail;
+use App\Mail\OrderShipped;
 
 use App\Http\Requests;
 
@@ -39,6 +40,21 @@ class ContactController extends Controller
         // Mail delivery logic goes here
         //Mail::to(config('mail.support.address'))->send(new ContactEmail($contact));
         Mail::to("DimaSkupejko@gmail.com")->send(new ContactEmail($contact));
+
+        flash('Your message has been sent!')->success();
+
+        return redirect()->route('contact.create');
+    }
+
+
+    public function ship(Request $request)
+    {
+        //$when = now()->addMinutes(10);
+
+        // Ship order
+        //Mail::to("DimaSkupejko@gmail.com")->later($when, new OrderShipped());
+        //return (new OrderShipped())->render();
+        Mail::to("kokos@gmail.com")->send(new OrderShipped());
 
         flash('Your message has been sent!')->success();
 

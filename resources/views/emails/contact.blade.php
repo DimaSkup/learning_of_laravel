@@ -1,4 +1,6 @@
 <body>
-    KOKOS
-    <img src="{{ $message->embedData($data, $name) }}">
+<h1>Hi, DimaSkup</h1>
+<p>
+    {{ $contact }}
+</p>
 </body>

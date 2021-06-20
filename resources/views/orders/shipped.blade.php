@@ -3,7 +3,7 @@
 
 Your order has been shipped!
 
-@component('mail::button', ['url' => $url, 'color' => 'success'])
+@component('mail::button', ['url' => "kokos.com", 'color' => 'success'])
 View Order
 @endcomponent
 

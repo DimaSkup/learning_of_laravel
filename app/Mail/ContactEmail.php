@@ -18,9 +18,9 @@ class ContactEmail extends Mailable
      *
      * @return void
      */
-    public function __construct($contact)
+    public function __construct()
     {
-        $this->contact = $contact;
+        $this->contact = "DON'T DO COKE IN THE BATHROOM";
     }
 
     /**
@@ -31,12 +31,6 @@ class ContactEmail extends Mailable
     public function build()
     {
         return $this
-                ->from('example@example.com')
-                //->to(config('mail.from.address'))
-               // ->subject('HackerPair Inquiry')
-                ->view('emails.contact')
-                ->attachData($this->pdf, 'name.pdf', [
-                    'mime' => 'application/pdf',
-                ]);
+                ->view('emails.contact');
     }
 }
