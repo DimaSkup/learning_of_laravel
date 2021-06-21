@@ -18,6 +18,8 @@
             {!! Form::textarea('msg', null, ['class' => 'form-control']) !!}
         </div>
 
+        <input type="hidden" name="recaptcha" id="recaptcha">
+
     {!! Form::submit('Submit', ['class' => 'btn btn-info']) !!}
 
     {!! Form::close() !!}

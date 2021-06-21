@@ -30,6 +30,42 @@ class ContactController extends Controller
 
     public function store(ContactFormRequest $request)
     {
+        $url = 'https://www.google.com/recaptcha/api/siteverify';
+        $remoteip = $_SERVER['REMOTE_ADDR'];
+        $data = [
+            'secret'    => config('services.recaptcha.secret'),
+            'response'  => $request->get('recaptcha'),
+            'remoteip'  => $remoteip
+        ];
+
+        $options = [
+            'http' => [
+                'header'    => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method'    => 'POST',
+                'content'   => http_build_query($data)
+            ]
+        ];
+
+
+
+        $context = stream_context_create($options);
+        $result = file_get_contents($url, false, $context);
+        $resultJson = json_decode($result);
+
+        dd($resultJson);
+
+        if ($resultJson->success != true) {
+            return back()->withErrors(['captcha' => 'ReCaptcha Error (result is not success)']);
+        }
+
+        if ($resultJson->score >= 0.3) {
+            // Validation was successful, add your form submission logic here
+            return back()->with('message', 'Thanks for your message!');
+        }
+        else {
+            return back()->withErrors(['captcha' => 'ReCaptcha Error']);
+        }
+
         $contact = [];
 
         $contact['name'] = $request->get('name');
