@@ -23,8 +23,15 @@ class ContactController extends Controller
         flash('Email was sent!');
     }
 
-    public function create()
+    public function create(Request $request)
     {
+        $session = $request->getSession();
+        $message = $session->get('message');
+
+        if ($message) {
+            flash($message)->success();
+        }
+
         return view('contact.create');
     }
 
@@ -52,18 +59,19 @@ class ContactController extends Controller
         $result = file_get_contents($url, false, $context);
         $resultJson = json_decode($result);
 
-        dd($resultJson);
-
         if ($resultJson->success != true) {
             return back()->withErrors(['captcha' => 'ReCaptcha Error (result is not success)']);
         }
 
         if ($resultJson->score >= 0.3) {
             // Validation was successful, add your form submission logic here
-            return back()->with('message', 'Thanks for your message!');
+            return redirect()
+                    ->route('contact.create')
+                    ->with('message', 'Thanks for your message!');
         }
         else {
-            return back()->withErrors(['captcha' => 'ReCaptcha Error']);
+            return redirect()
+                    ->route('contact.create')->withErrors(['captcha' => 'ReCaptcha Error']);
         }
 
         $contact = [];
