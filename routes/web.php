@@ -58,5 +58,7 @@ Route::get('locations', [LocationsController::class, 'index'])->name('locations.
 
 Route::get('map', [MapsController::class, 'index'])->name('maps.index');
 
+
 Auth::routes();
 
+Route::get('/home', 'HomeController@index')->name('home');
