@@ -11,6 +11,7 @@
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
+                        <!-- ASKING FOR EMAIL
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
@@ -23,6 +24,24 @@
                                     </span>
                                 @enderror
                             </div>
+                        </div>
+                        -->
+
+                        <!-- ASKING FOR USERNAME -->
+                        <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
+                            {!! Form::label('username', 'Username', ['class' => 'control-label']) !!}
+                            {!! Form::text('username', null,
+                                [
+                                    'class'         => 'form-control',
+                                    'placeholder'   => 'Input your username'
+                                ])
+                            !!}
+
+                            @error('username')
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('usernmae') }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
                         <div class="form-group row">

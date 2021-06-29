@@ -25,6 +25,17 @@
                             </div>
                         </div>
 
+                        <!-- an username input field -->
+                        <div class="form-group">
+                            {!! Form::label('username', 'Username', ['class' => 'control-label']) !!}
+                            {!! Form::text('username', null,
+                                [
+                                    'class'         => 'form-control',
+                                    'placeholder'   => "Please, input your username",
+                                ])
+                            !!}
+                        </div>
+
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
