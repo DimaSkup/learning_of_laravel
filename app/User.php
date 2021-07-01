@@ -25,11 +25,7 @@ class User extends Authenticatable
     {
         return "kek_" . $this->lastname;
     }
-
-    public function setPasswordAttribute($password)
-    {
-        $this->attributes['password'] = bcrypt($password);
-    }
+    
 
     public function profile(): \Illuminate\Database\Eloquent\Relations\HasOne
     {

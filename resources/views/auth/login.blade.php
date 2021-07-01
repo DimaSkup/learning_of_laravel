@@ -36,13 +36,13 @@
                                     'placeholder'   => 'Input your username'
                                 ])
                             !!}
+                        </div>
 
                             @error('username')
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('usernmae') }}</strong>
+                            <span class="help-block">
+                                    <strong>{{ $errors->first('username') }}</strong>
                                 </span>
                             @enderror
-                        </div>
 
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
