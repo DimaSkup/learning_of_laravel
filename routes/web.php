@@ -14,6 +14,9 @@ use App\Http\Controllers\LanguagesController;
 use App\Http\Controllers\LocationsController;
 use App\Http\Controllers\MapsController;
 
+## OAuth Controllers ##
+use App\Http\Controllers\SocialGitHubController;
+
 use App\Http\Controllers\ContactController;
 
 
@@ -62,3 +65,7 @@ Route::get('map', [MapsController::class, 'index'])->name('maps.index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+## OAuth with GitHub ##
+Route::get('auth/github', [SocialGitHubController::class, 'redirectToProvider']);
+Route::get('auth/github/callback', [SocialGitHubController::class, 'handleProviderCallback']);

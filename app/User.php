@@ -25,7 +25,7 @@ class User extends Authenticatable
     {
         return "kek_" . $this->lastname;
     }
-    
+
 
     public function profile(): \Illuminate\Database\Eloquent\Relations\HasOne
     {

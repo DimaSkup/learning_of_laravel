@@ -84,6 +84,9 @@
                             </div>
                         </div>
                     </form>
+
+                    <!-- Login with OAuth -->
+                    <a href="/auth/github">Login with GitHub</a>
                 </div>
             </div>
         </div>

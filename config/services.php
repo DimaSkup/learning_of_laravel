@@ -35,4 +35,10 @@ return [
         'secret'    => env('GOOGLE_RECAPTCHA_SECRET_KEY'),
     ],
 
+
+    'github' => [
+        'client_id'     => env('OAUTH_GITHUB_CLIENT_ID'),
+        'client_secret' => env('OAUTH_GITHUB_CLIENT_SECRET'),
+        'redirect'      => env('OAUTH_GITHUB_CALLBACK'),
+    ],
 ];
