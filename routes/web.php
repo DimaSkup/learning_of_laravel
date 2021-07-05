@@ -15,7 +15,7 @@ use App\Http\Controllers\LocationsController;
 use App\Http\Controllers\MapsController;
 
 ## OAuth Controllers ##
-use App\Http\Controllers\SocialGitHubController;
+use App\Http\Controllers\Auth\SocialGitHubController;
 
 use App\Http\Controllers\ContactController;
 

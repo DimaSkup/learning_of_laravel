@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -15,7 +15,9 @@ class SocialGitHubController extends Controller
 {
     public function redirectToProvider()
     {
-        return Socialite::driver('github')->redirect();
+        return Socialite::driver('github')
+            ->scopes(['read:user', 'public_repo'])
+            ->redirect();
     }
 
     public function handleProviderCallback()
@@ -33,8 +35,11 @@ class SocialGitHubController extends Controller
 
             $newUser->email = $user->getEmail();
             $newUser->provider_id = $user->getId();
+            $newUser->name = $user->getNickname();
+            $newUser->username = $user->getNickname();
             $newUser->handle_github = $user->getNickname();
             $newUser->password = bcrypt(uniqid());
+
 
             $newUser->save();
 
