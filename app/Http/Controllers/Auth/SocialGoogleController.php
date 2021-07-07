@@ -13,19 +13,19 @@ use Exception;
 
 use App\User;
 
-class SocialGitHubController extends Controller
+class SocialGoogleController extends Controller
 {
     public function redirectToProvider()
     {
-        return Socialite::driver('github')
-            ->scopes(['read:user', 'public_repo'])
+        return Socialite::driver('google')
+            ->scopes(['email', 'profile'])
             ->redirect();
     }
 
     public function handleProviderCallback()
     {
         try {
-            $user = Socialite::driver('github')->user();
+            $user = Socialite::driver('google')->user();
 
             $existingUser = User::where('provider_id', $user->getId())->first();
 
@@ -37,18 +37,17 @@ class SocialGitHubController extends Controller
 
                 $newUser->email = $user->getEmail();
                 $newUser->provider_id = $user->getId();
-                $newUser->name = $user->getNickname();
-                $newUser->username = $user->getNickname();
-                $newUser->handle_social = $user->getNickname();
+                $newUser->name = $user->getName();
+                $newUser->username = $user->getName();
+                $newUser->handle_social = $user->getName();
                 $newUser->password = bcrypt(uniqid());
-
 
                 $newUser->save();
 
                 Auth::login($newUser);
             }
 
-            flash('Successfully authenticated using GitHub');
+            flash('Successfully authenticated using Google');
 
             return redirect('/');
         }

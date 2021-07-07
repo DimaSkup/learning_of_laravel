@@ -14,8 +14,8 @@ class AddOauthFieldsToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->bigInteger('provider_id')->unsigned()->nullable();
-            $table->string('handle_github')->nullable();
+            $table->string('provider_id')->nullable();
+            $table->string('handle_social')->nullable();
         });
     }
 
@@ -28,7 +28,7 @@ class AddOauthFieldsToUsers extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('provider_id');
-            $table->dropColumn('handle_github');
+            $table->dropColumn('handle_social');
         });
     }
 }

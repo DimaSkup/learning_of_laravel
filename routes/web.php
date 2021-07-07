@@ -15,6 +15,7 @@ use App\Http\Controllers\LocationsController;
 use App\Http\Controllers\MapsController;
 
 ## OAuth Controllers ##
+use App\Http\Controllers\Auth\SocialGoogleController;
 use App\Http\Controllers\Auth\SocialGitHubController;
 
 use App\Http\Controllers\ContactController;
@@ -65,6 +66,10 @@ Route::get('map', [MapsController::class, 'index'])->name('maps.index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+## OAuth with Google ##
+Route::get('auth/google', [SocialGoogleController::class, 'redirectToProvider']);
+Route::get('auth/google/callback', [SocialGoogleController::class, 'handleProviderCallback']);
 
 ## OAuth with GitHub ##
 Route::get('auth/github', [SocialGitHubController::class, 'redirectToProvider']);

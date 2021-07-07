@@ -86,7 +86,12 @@
                     </form>
 
                     <!-- Login with OAuth -->
-                    <a href="/auth/github">Login with GitHub</a>
+                    <div>
+                        <a href="/auth/google">Login with Google</a>
+                    </div>
+                    <div>
+                        <a href="/auth/github">Login with GitHub</a>
+                    </div>
                 </div>
             </div>
         </div>

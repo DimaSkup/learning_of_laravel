@@ -179,6 +179,12 @@ return [
          * Flash Notifications
          */
         Laracasts\Flash\FlashServiceProvider::class,
+
+
+        /*
+         * A Laravel Socialite service
+         */
+        Laravel\Socialite\SocialiteServiceProvider::class,
     ],
 
     /*
@@ -231,6 +237,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
     ],
 
 ];
