@@ -87,10 +87,16 @@
 
                     <!-- Login with OAuth -->
                     <div>
+                        <!-- GOOGLE -->
                         <a href="/auth/google">Login with Google</a>
                     </div>
                     <div>
+                        <!-- GITHUB -->
                         <a href="/auth/github">Login with GitHub</a>
+                    </div>
+                    <div>
+                        <!-- FACEBOOK -->
+                        <a href="/auth/facebook">Login with Facebook</a>
                     </div>
                 </div>
             </div>

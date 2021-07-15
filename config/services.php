@@ -46,4 +46,10 @@ return [
         'client_secret' => env('OAUTH_GITHUB_CLIENT_SECRET'),
         'redirect'      => env('OAUTH_GITHUB_CALLBACK'),
     ],
+
+    'facebook' => [
+        'client_id'     => env('OAUTH_FACEBOOK_CLIENT_ID'),
+        'client_secret' => env('OAUTH_FACEBOOK_CLIENT_SECRET'),
+        'redirect'      => env('OAUTH_FACEBOOK_CALLBACK'),
+    ],
 ];

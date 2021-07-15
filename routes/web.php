@@ -1,6 +1,7 @@
 <?php
 
 
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +18,7 @@ use App\Http\Controllers\MapsController;
 ## OAuth Controllers ##
 use App\Http\Controllers\Auth\SocialGoogleController;
 use App\Http\Controllers\Auth\SocialGitHubController;
+use App\Http\Controllers\Auth\SocialFacebookController;
 
 use App\Http\Controllers\ContactController;
 
@@ -74,3 +76,8 @@ Route::get('auth/google/callback', [SocialGoogleController::class, 'handleProvid
 ## OAuth with GitHub ##
 Route::get('auth/github', [SocialGitHubController::class, 'redirectToProvider']);
 Route::get('auth/github/callback', [SocialGitHubController::class, 'handleProviderCallback']);
+
+# OAuth with Facebook ##
+Route::get('auth/facebook', [SocialFacebookController::class, 'redirectToProvider']);
+Route::get('auth/facebook/callback', [SocialFacebookController::class, 'handleProviderCallback']);
+
