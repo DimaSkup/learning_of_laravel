@@ -22,7 +22,6 @@ use App\Http\Controllers\Auth\SocialFacebookController;
 
 use App\Http\Controllers\ContactController;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -77,7 +76,14 @@ Route::get('auth/google/callback', [SocialGoogleController::class, 'handleProvid
 Route::get('auth/github', [SocialGitHubController::class, 'redirectToProvider']);
 Route::get('auth/github/callback', [SocialGitHubController::class, 'handleProviderCallback']);
 
-# OAuth with Facebook ##
+## OAuth with Facebook ##
 Route::get('auth/facebook', [SocialFacebookController::class, 'redirectToProvider']);
 Route::get('auth/facebook/callback', [SocialFacebookController::class, 'handleProviderCallback']);
 
+
+## Administration routes ##
+## Located at: app\Http\Controllers\Admin
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function()
+{
+   Route::resource('user', UsersController::class);
+});
