@@ -83,7 +83,12 @@ Route::get('auth/facebook/callback', [SocialFacebookController::class, 'handlePr
 
 ## Administration routes ##
 ## Located at: app\Http\Controllers\Admin
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function()
-{
-   Route::resource('user', UsersController::class);
-});
+Route::group(
+    [
+        'prefix'        => 'admin',
+        'namespace'     => 'Admin',
+        'middleware'    => 'admin'
+    ], function()
+    {
+        Route::resource('user', UsersController::class);
+    });
